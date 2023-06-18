@@ -14,12 +14,11 @@ class ExpensesList extends StatelessWidget {
       itemCount: expenses.length,
       itemBuilder: (cntx, index) => Dismissible(
         background: Container(
-          color: Colors.red,
+          color: Theme.of(context).colorScheme.error.withOpacity(0.75),
           alignment: Alignment.centerRight,
           padding: const EdgeInsets.only(right: 20),
-          margin: const EdgeInsets.symmetric(
-            horizontal: 15,
-            vertical: 4,
+          margin: EdgeInsets.symmetric(
+            horizontal: Theme.of(context).cardTheme.margin!.horizontal,
           ),
           child: const Icon(
             Icons.delete,

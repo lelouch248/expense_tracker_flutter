@@ -73,6 +73,8 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return SizedBox(
       height: double.infinity,
       child: Padding(
@@ -103,9 +105,12 @@ class _NewExpenseState extends State<NewExpense> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(_selectedDate != null
-                            ? formatter.format(_selectedDate!)
-                            : 'No date chosen'),
+                        Text(
+                          _selectedDate != null
+                              ? formatter.format(_selectedDate!)
+                              : 'No date chosen',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
                         IconButton(
                           onPressed: _presentDatePicker,
                           icon: const Icon(Icons.calendar_month),
@@ -127,6 +132,7 @@ class _NewExpenseState extends State<NewExpense> {
                               value: category,
                               child: Text(
                                 category.name.toUpperCase(),
+                                style: Theme.of(context).textTheme.bodySmall,
                               ),
                             ),
                           )
@@ -153,7 +159,12 @@ class _NewExpenseState extends State<NewExpense> {
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.red),
                     ),
-                    child: const Text('Cancle Expense'),
+                    child: Text(
+                      'Cancle Expense',
+                      style: TextStyle(
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
+                    ),
                   )
                 ],
               ),
