@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:expense_tracker/widgets/components/new_addbutton.dart';
-import 'package:expense_tracker/widgets/components/new_amount.dart';
-import 'package:expense_tracker/widgets/components/new_cancle_expense.dart';
-import 'package:expense_tracker/widgets/components/new_date.dart';
-import 'package:expense_tracker/widgets/components/new_dropdownbutton.dart';
-import 'package:expense_tracker/widgets/components/new_title.dart';
+import 'package:expense_tracker/widgets/components/new_expense/new_addbutton.dart';
+import 'package:expense_tracker/widgets/components/new_expense/new_amount.dart';
+import 'package:expense_tracker/widgets/components/new_expense/new_cancle_expense.dart';
+import 'package:expense_tracker/widgets/components/new_expense/new_date.dart';
+import 'package:expense_tracker/widgets/components/new_expense/new_dropdownbutton.dart';
+import 'package:expense_tracker/widgets/components/new_expense/new_title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense.dart';
