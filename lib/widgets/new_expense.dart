@@ -1,5 +1,9 @@
 import 'dart:io';
 
+import 'package:expense_tracker/widgets/components/new_amount.dart';
+import 'package:expense_tracker/widgets/components/new_date.dart';
+import 'package:expense_tracker/widgets/components/new_dropdownbutton.dart';
+import 'package:expense_tracker/widgets/components/new_title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense.dart';
@@ -117,105 +121,40 @@ class _NewExpenseState extends State<NewExpense> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: TextField(
-                            controller: _titleController,
-                            maxLength: 50,
-                            decoration:
-                                const InputDecoration(labelText: 'Title'),
-                          ),
+                          child: NewExpenseTitle(
+                              titleController: _titleController),
                         ),
-                        Expanded(
-                          child: TextField(
-                            controller: _amountController,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                                prefix: Text('₹'), labelText: 'Amount'),
-                          ),
-                        ),
+                        NewExpenseAmount(amountController: _amountController),
                       ],
                     )
                   else
-                    TextField(
-                      controller: _titleController,
-                      maxLength: 50,
-                      decoration: const InputDecoration(labelText: 'Title'),
-                    ),
+                    NewExpenseTitle(titleController: _titleController),
                   if (width >= 600)
                     Row(
                       children: [
-                        DropdownButton(
-                            value: _selectedCategory,
-                            items: Category.values
-                                .map(
-                                  (category) => DropdownMenuItem(
-                                    value: category,
-                                    child: Text(
-                                      category.name.toUpperCase(),
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: (value) {
-                              if (value == null) {
-                                return;
-                              }
-                              setState(() {
-                                _selectedCategory = value;
-                              });
-                            }),
+                        NewDropDownButton(
+                          selectedCategory: _selectedCategory,
+                          onChanged: (value) {
+                            if (value == null) {
+                              return;
+                            }
+                            setState(() {
+                              _selectedCategory = value;
+                            });
+                          },
+                        ),
                         const SizedBox(width: 24),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                _selectedDate != null
-                                    ? formatter.format(_selectedDate!)
-                                    : 'No date chosen',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                              IconButton(
-                                onPressed: _presentDatePicker,
-                                icon: const Icon(Icons.calendar_month),
-                              )
-                            ],
-                          ),
-                        )
+                        NewExpenseDate(_selectedDate,
+                            presentDatePicker: _presentDatePicker)
                       ],
                     )
                   else
                     Row(
                       children: [
-                        Expanded(
-                          child: TextField(
-                            controller: _amountController,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                                prefix: Text('₹'), labelText: 'Amount'),
-                          ),
-                        ),
+                        NewExpenseAmount(amountController: _amountController),
                         const SizedBox(width: 20),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                _selectedDate != null
-                                    ? formatter.format(_selectedDate!)
-                                    : 'No date chosen',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                              IconButton(
-                                onPressed: _presentDatePicker,
-                                icon: const Icon(Icons.calendar_month),
-                              )
-                            ],
-                          ),
-                        )
+                        NewExpenseDate(_selectedDate,
+                            presentDatePicker: _presentDatePicker)
                       ],
                     ),
                   const SizedBox(height: 20),
@@ -250,28 +189,17 @@ class _NewExpenseState extends State<NewExpense> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        DropdownButton(
-                            value: _selectedCategory,
-                            items: Category.values
-                                .map(
-                                  (category) => DropdownMenuItem(
-                                    value: category,
-                                    child: Text(
-                                      category.name.toUpperCase(),
-                                      style:
-                                          Theme.of(context).textTheme.bodySmall,
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: (value) {
-                              if (value == null) {
-                                return;
-                              }
-                              setState(() {
-                                _selectedCategory = value;
-                              });
-                            }),
+                        NewDropDownButton(
+                          selectedCategory: _selectedCategory,
+                          onChanged: (value) {
+                            if (value == null) {
+                              return;
+                            }
+                            setState(() {
+                              _selectedCategory = value;
+                            });
+                          },
+                        ),
                         const Spacer(),
                         ElevatedButton(
                           onPressed: _submitExpenseData,
