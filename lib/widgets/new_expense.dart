@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:expense_tracker/widgets/components/new_addbutton.dart';
 import 'package:expense_tracker/widgets/components/new_amount.dart';
+import 'package:expense_tracker/widgets/components/new_cancle_expense.dart';
 import 'package:expense_tracker/widgets/components/new_date.dart';
 import 'package:expense_tracker/widgets/components/new_dropdownbutton.dart';
 import 'package:expense_tracker/widgets/components/new_title.dart';
@@ -162,26 +164,12 @@ class _NewExpenseState extends State<NewExpense> {
                     Row(
                       children: [
                         Expanded(
-                          child: ElevatedButton(
-                            onPressed: _submitExpenseData,
-                            child: const Text('Add expense'),
-                          ),
+                          child: NewAddExpenseButton(
+                              submitExpenseData: _submitExpenseData),
                         ),
                         const SizedBox(width: 20),
                         Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                isDarkMode
-                                    ? Colors.grey[800]
-                                    : Colors.grey[200],
-                              ),
-                            ),
-                            child: const Text('Cancel'),
-                          ),
+                          child: NewElevatedButton(isDarkMode: isDarkMode),
                         ),
                       ],
                     )
@@ -201,26 +189,10 @@ class _NewExpenseState extends State<NewExpense> {
                           },
                         ),
                         const Spacer(),
-                        ElevatedButton(
-                          onPressed: _submitExpenseData,
-                          child: const Text('Add expense'),
-                        ),
+                        NewAddExpenseButton(
+                            submitExpenseData: _submitExpenseData),
                         const SizedBox(width: 20),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.red),
-                          ),
-                          child: Text(
-                            'Cancle Expense',
-                            style: TextStyle(
-                              color: isDarkMode ? Colors.white : Colors.black,
-                            ),
-                          ),
-                        )
+                        NewElevatedButton(isDarkMode: isDarkMode),
                       ],
                     ),
                 ],
